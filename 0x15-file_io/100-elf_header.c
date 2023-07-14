@@ -38,22 +38,6 @@ void close_elf(int elf);
 *You are allowed to use printf
 **/
 
-void check_elf(unsigned char *e_ident)
-{
-	int index;
-
-	for (index = 0; index < 4; index++)
-	{
-		if (e_ident[index] != 127 &&
-		    e_ident[index] != 'E' &&
-		    e_ident[index] != 'L' &&
-		    e_ident[index] != 'F')
-		{
-			dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
-			exit(98);
-		}
-	}
-}
 
 void check_elf(unsigned char *e_ident)
 {
@@ -188,7 +172,7 @@ void print_osabi(unsigned char *e_ident)
 
 void print_abi(unsigned char *e_ident)
 {
-	printf("  ABI Version:                       %d\n",
+	printf("  ABI Version:  %d\n",
 	       e_ident[EI_ABIVERSION]);
 }
 
@@ -291,4 +275,3 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	close_elf(o);
 	return (0);
 }
-
